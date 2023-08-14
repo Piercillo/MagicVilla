@@ -11,6 +11,8 @@ namespace MagicVilla_API.Datos
         }
         //los modelos que vamos a agregar
         public DbSet<Villa> Villas { get; set; }
+        public DbSet<NumeroVilla> NumeroVillas { get; set; }
+
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)//para crear un rregistro cada vez que se inicie
         {
