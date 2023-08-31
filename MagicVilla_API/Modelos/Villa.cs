@@ -11,9 +11,8 @@ namespace MagicVilla_API.Modelos
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]//controlara que se asigne autolnaticamente el id
         public int Id { get; set; }
 
+        [Required]
         public string Nombre { get; set; }
-
-
 
         public string Detalle { get; set; }
 

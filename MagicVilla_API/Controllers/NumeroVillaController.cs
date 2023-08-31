@@ -62,7 +62,7 @@ namespace MagicVilla_API.Controllers
 
         //otro end point que nos teronara solo una villa
         //con el id que le pasemos
-        [HttpGet("id:int", Name = "GetNumeroVilla")]//hay que ponerle una ruta distinta sino da error
+        [HttpGet("{id:int}", Name = "GetNumeroVilla")]//hay que ponerle una ruta distinta sino da error
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
@@ -103,7 +103,7 @@ namespace MagicVilla_API.Controllers
         [HttpPost]
         [ProducesResponseType(StatusCodes.Status201Created)] //codigo de estado 
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        [ProducesResponseType(StatusCodes.Status404NotFound)]
+
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         public async Task<ActionResult<APIResponse>> CrearNumeroVilla([FromBody] NumeroVillaCreateDto createDto) //el villaDto es el nombre, antes le di el modelo
         {
@@ -190,27 +190,28 @@ namespace MagicVilla_API.Controllers
         [HttpPut("{id:int}")]
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        public async Task<IActionResult> UpdateNumeroVilla(int id, [FromBody] NumeroVillaUpdateDto updateDto) //recibido de villadto y le pondre de nombre villa dto
+        public async Task<IActionResult> UpdateNumeroVilla(int id, [FromBody] NumeroVillaUpdateDto updateDto)
         {
-            if (updateDto == null || id!= updateDto.VillaNo)
+            if (updateDto == null || id != updateDto.VillaNo)
             {
                 _response.IsExitoso = false;
                 _response.statusCode = HttpStatusCode.BadRequest;
                 return BadRequest(_response);
             }
 
-            if (await _villaRepo.Obtener(V=>V.Id == updateDto.VillaId)==null)
+            if (await _villaRepo.Obtener(V => V.Id == updateDto.VillaId) == null)
             {
-                ModelState.AddModelError("ClaveForanea", "El id de la villa no existe");
+                ModelState.AddModelError("ErrorMessages", "El Id de la Villa No existe!");
                 return BadRequest(ModelState);
             }
 
             NumeroVilla modelo = _mapper.Map<NumeroVilla>(updateDto);
 
+
             await _numeroRepo.Actualizar(modelo);
             _response.statusCode = HttpStatusCode.NoContent;
-            //await _db.SaveChangesAsync();
-            return Ok(_response);//no quiero retornar el modelo
+
+            return Ok(_response);
         }
 
         //[HttpPatch("{id:int}")]

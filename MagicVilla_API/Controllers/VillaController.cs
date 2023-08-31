@@ -52,14 +52,15 @@ namespace MagicVilla_API.Controllers
             {
                 _response.IsExitoso = false;
                 _response.ErrorMessages = new List<string>() { ex.ToString() };
-                return Ok(_response);
+                
             }
-            
+            return _response;
+
         }
 
         //otro end point que nos teronara solo una villa
         //con el id que le pasemos
-        [HttpGet("id:int", Name = "GetVilla")]//hay que ponerle una ruta distinta sino da error
+        [HttpGet("{id:int}", Name = "GetVilla")]//hay que ponerle una ruta distinta sino da error
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
@@ -98,9 +99,8 @@ namespace MagicVilla_API.Controllers
         }
 
         [HttpPost]
-        [ProducesResponseType(StatusCodes.Status201Created)] //codigo de estado 
+        [ProducesResponseType(StatusCodes.Status201Created)] //codigo de estado
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         public async Task<ActionResult<APIResponse>> CrearVilla([FromBody] VillaCreateDto createDto) //el villaDto es el nombre, antes le di el modelo
         {
@@ -180,9 +180,9 @@ namespace MagicVilla_API.Controllers
         [HttpPut("{id:int}")]
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        public async Task<IActionResult> UpdateVilla(int id, [FromBody] VillaUpdateDto updateDto) //recibido de villadto y le pondre de nombre villa dto
+        public async Task<IActionResult> UpdateVilla(int id, [FromBody] VillaUpdateDto updateDto)
         {
-            if (updateDto == null || id!= updateDto.Id)
+            if (updateDto == null || id != updateDto.Id)
             {
                 _response.IsExitoso = false;
                 _response.statusCode = HttpStatusCode.BadRequest;
@@ -191,31 +191,32 @@ namespace MagicVilla_API.Controllers
 
             Villa modelo = _mapper.Map<Villa>(updateDto);
 
+
             await _villaRepo.Actualizar(modelo);
             _response.statusCode = HttpStatusCode.NoContent;
-            //await _db.SaveChangesAsync();
-            return Ok(_response);//no quiero retornar el modelo
+
+            return Ok(_response);
         }
 
 
         [HttpPatch("{id:int}")]
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        public async Task<IActionResult> UpdatePartialVilla(int id, JsonPatchDocument<VillaUpdateDto> patchDto) //recibido de villadto y le pondre de nombre villa dto
+        public async Task<IActionResult> UpdatePartialVilla(int id, JsonPatchDocument<VillaUpdateDto> patchDto)
         {
             if (patchDto == null || id == 0)
             {
                 return BadRequest();
             }
-            //buscar el registro por id
-            //var villa = VillaStore.villaList.FirstOrDefault(v => v.Id == id);
-            var villa = await _villaRepo.Obtener(v => v.Id == id, tracked:false );
+            var villa = await _villaRepo.Obtener(v => v.Id == id, tracked: false);
 
             VillaUpdateDto villaDto = _mapper.Map<VillaUpdateDto>(villa);
 
+
             if (villa == null) return BadRequest();
 
-            patchDto.ApplyTo(villaDto, ModelState); //verificar que el model state sea valido
+            patchDto.ApplyTo(villaDto, ModelState);
+
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
@@ -223,11 +224,12 @@ namespace MagicVilla_API.Controllers
 
             Villa modelo = _mapper.Map<Villa>(villaDto);
 
+
             await _villaRepo.Actualizar(modelo);
             _response.statusCode = HttpStatusCode.NoContent;
-            //await _db.SaveChangesAsync();
-            return Ok(_response);//no quiero retornar el modelo
-        }//3:30:57
+
+            return Ok(_response);
+        }
 
     }
 }
