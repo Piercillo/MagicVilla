@@ -24,8 +24,28 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxQcml2YWN5LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
+[D:/Api/MagicVilla_API/MagicVilla_Web/Views/NumeroVilla/ActualizarNumeroVilla.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcTnVtZXJvVmlsbGFcQWN0dWFsaXphck51bWVyb1ZpbGxhLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/Api/MagicVilla_API/MagicVilla_Web/Views/NumeroVilla/CrearNumeroVilla.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcTnVtZXJvVmlsbGFcQ3JlYXJOdW1lcm9WaWxsYS5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/Api/MagicVilla_API/MagicVilla_Web/Views/NumeroVilla/IndexNumeroVilla.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcTnVtZXJvVmlsbGFcSW5kZXhOdW1lcm9WaWxsYS5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/Api/MagicVilla_API/MagicVilla_Web/Views/NumeroVilla/RemoverNumeroVilla.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcTnVtZXJvVmlsbGFcUmVtb3Zlck51bWVyb1ZpbGxhLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
 [D:/Api/MagicVilla_API/MagicVilla_Web/Views/Shared/Error.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXEVycm9yLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/Api/MagicVilla_API/MagicVilla_Web/Views/Shared/_Notificacion.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9Ob3RpZmljYWNpb24uY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
 [D:/Api/MagicVilla_API/MagicVilla_Web/Views/Shared/_ValidationScriptsPartial.cshtml]
@@ -42,6 +62,10 @@ build_metadata.AdditionalFiles.CssScope =
 
 [D:/Api/MagicVilla_API/MagicVilla_Web/Views/Villa/IndexVilla.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVmlsbGFcSW5kZXhWaWxsYS5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/Api/MagicVilla_API/MagicVilla_Web/Views/Villa/RemoverVilla.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVmlsbGFcUmVtb3ZlclZpbGxhLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
 [D:/Api/MagicVilla_API/MagicVilla_Web/Views/_ViewImports.cshtml]

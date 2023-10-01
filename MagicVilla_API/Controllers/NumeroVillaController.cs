@@ -45,7 +45,7 @@ namespace MagicVilla_API.Controllers
             try
             {
                 _logger.LogInformation("Obtener numero de villas");
-                IEnumerable<NumeroVilla> numeroVillasList = await _numeroRepo.ObtenerTodos();
+                IEnumerable<NumeroVilla> numeroVillasList = await _numeroRepo.ObtenerTodos(incluirPropiedades:"Villa");
                 _response.Resultado = _mapper.Map<IEnumerable<NumeroVillaDto>>(numeroVillasList);
                 _response.statusCode = HttpStatusCode.OK;
                 
@@ -78,7 +78,7 @@ namespace MagicVilla_API.Controllers
                     return BadRequest(_response);//1:44:22
                 }
                 // villa = VillaStore.villaList.FirstOrDefault(v => v.Id == id);
-                var numeroVilla = await _numeroRepo.Obtener(v => v.VillaNo == id);
+                var numeroVilla = await _numeroRepo.Obtener(v => v.VillaNo == id, incluirPropiedades:"Villa");
 
                 if (numeroVilla == null)//si encontro el registro
                 {
@@ -115,13 +115,13 @@ namespace MagicVilla_API.Controllers
                 }
                 if (await _numeroRepo.Obtener(v => v.VillaNo == createDto.VillaNo) != null)  //validacion que no sea igual a otra que existe
                 {
-                    ModelState.AddModelError("NombreExiste", "El numero de la villa ya existe!");//nombre de la validacion y mensaje que quiero mostrar
+                    ModelState.AddModelError("ErrorMessages", "El numero de la villa ya existe!");//nombre de la validacion y mensaje que quiero mostrar
                     return BadRequest(ModelState);
                 }
 
                 if (await _villaRepo.Obtener(v=>v.Id==createDto.VillaId) == null)
                 {
-                    ModelState.AddModelError("ClaveForanea", "El Id de la villa no existe!");//nombre de la validacion y mensaje que quiero mostrar
+                    ModelState.AddModelError("ErrorMessages", "El Id de la villa no existe!");//nombre de la validacion y mensaje que quiero mostrar
                     return BadRequest(ModelState);
                 }
 

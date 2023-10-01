@@ -50,6 +50,7 @@ namespace MagicVilla_Web.Controllers
                 var response = await _villaService.Crear<APIResponse>(modelo);
                 if (response != null && response.IsExitoso)
                 {
+                    TempData["exitoso"] = "Villa creada exitosamente";
                     return RedirectToAction(nameof(IndexVilla));//redireccionar
                 }
             }
@@ -79,11 +80,44 @@ namespace MagicVilla_Web.Controllers
                 var response = await _villaService.Actualizar<APIResponse>(modelo);
                 if ( response != null && response.IsExitoso )
                 {
+                    TempData["exitoso"] = "Villa actualizada exitosamente";
                     return RedirectToAction(nameof(IndexVilla));
                 }
             }
             return View(modelo);
         }
+
+        //delete 
+        public async Task<IActionResult> RemoverVilla(int villaId)
+        {
+            var response = await _villaService.Obtener<APIResponse>(villaId);
+            if (response != null && response.IsExitoso)
+            {
+                VillaDto model = JsonConvert.DeserializeObject<VillaDto>(Convert.ToString(response.Resultado));
+                return View(model);
+            }
+
+            return NotFound();
+
+        }
+        //otro post para enviar esa villa y actualizar
+        [HttpPost]
+        [ValidateAntiForgeryToken]//medida de seguridad que ayuda a garantizar que las solicitudes provengan del usuario autenticado y no de un atacante malicioso que intente aprovechar la sesión activa
+        public async Task<IActionResult> RemoverVilla(VillaDto modelo)
+        {
+            var response = await _villaService.Remover<APIResponse>(modelo.Id);
+            if (response != null && response.IsExitoso)
+            {
+                TempData["exitoso"] = "Villa creada exitosamente";
+                return RedirectToAction(nameof(IndexVilla));
+            }
+            TempData["error"] = "A ocurrido un error";
+            return View(modelo);
+        }
+
+
+
+
 
     }
 }

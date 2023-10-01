@@ -112,7 +112,7 @@ namespace MagicVilla_API.Controllers
                 }
                 if (await _villaRepo.Obtener(v => v.Nombre.ToLower() == createDto.Nombre.ToLower()) != null)  //validacion que no sea igual a otra que existe
                 {
-                    ModelState.AddModelError("NombreExiste", "La Villa con ese nombre ya existe!");//nombre de la validacion y mensaje que quiero mostrar
+                    ModelState.AddModelError("ErrorMessages", "La Villa con ese nombre ya existe!");//nombre de la validacion y mensaje que quiero mostrar
                     return BadRequest(ModelState);
                 }
                 if (createDto == null)
